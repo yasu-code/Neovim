@@ -80,7 +80,7 @@ return {
     },
     {
         "tpope/vim-fugitive",
-        lazy = true,
+        lazy = true,
         config = function()
             vim.api.nvim_set_keymap("n", "<leader>gs", ":Git<CR>", { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<leader>gd", ":Gdiff<CR>", { noremap = true, silent = true })
