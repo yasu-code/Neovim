@@ -1,0 +1,158 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = 'coc#util#install()'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+    let g:indent_guides_enable_on_vim_startup = 1
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  nnoremap <leader>n :NERDTreeFocus<CR>
+  nnoremap <C-n> :NERDTreeToggle<CR>
+  nnoremap <C-f> :NERDTreeFind<CR>
+'''
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+
+[[plugins]]
+repo = 'sainnhe/everforest'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  set signcolumn=yes
+  set updatetime=1000
+  nnoremap [gitgutter] <Nop>
+  nmap <C-g> [gitgutter]
+  nmap [gitgutter]n :GitGutterNextHunk<CR>
+  nmap [gitgutter]p :GitGutterPrevHunk<CR>
+  nmap [gitgutter]u :GitGutterUndoHunk<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  nnoremap <leader>gs :Git<CR>
+  nnoremap <leader>gd :Gdiff<CR>
+  nnoremap <leader>gl :Gclog<CR>
+  nnoremap <leader>gb :Git blame<CR>
+  nnoremap <leader>ga :Git add %:p<CR><CR>
+  nnoremap <leader>gc :Gcommit<CR><CR>
+  nnoremap <leader>gp :Gpush<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'phaazon/hop.nvim'
+hook_add = '''
+lua << EOF
+  require'hop'.setup()
+EOF
+nmap <Leader><Leader> [hop]
+xmap <Leader><Leader> [hop]
+nnoremap <silent> [hop]w :HopWord<CR>
+nnoremap <silent> [hop]l :HopLine<CR>
+nnoremap <silent> [hop]f :HopChar1<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+
+[[plugins]]
+repo = 'alvan/vim-closetag'
+hook_add = '''
+    let g:closetag_filenames = '*.html, *.js, *.jsx, *.php, *.tpl'
+'''
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    set laststatus=2
+    let g:airline_theme = 'cobalt2'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#left_sep = ' '
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline_powerline_fonts = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'APZelos/blamer.nvim'
+hook_add = '''
+    let g:blamer_enabled = 1
+    let g:blamer_delay = 1000
+'''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+    nnoremap <leader>ff :GFiles<CR>
+    nnoremap <leader>fgf :GFiles?<CR>
+    nnoremap <leader>fb :Buffers<CR>
+    nnoremap <leader>fh :History<CR>
+    nnoremap <leader>fw :Windows<CR>
+    nnoremap <leader>fr :Rg<CR>
+'''
+
+[[plugins]]
+repo = 'heavenshell/vim-jsdoc'
+hook_add = '''
+    let g:jsdoc_lehre_path = '~/.config/yarn/global/node_modules/lehre/bin/lehre'
+'''
+
+[[plugins]]
+repo = 'yasu-code/vim-chatgpt'
+rev = 'nvim-add-refactor'
+hook_add = '''
+    vnoremap <leader>rev :<C-u>Review<CR>
+'''
+
+[[plugins]]
+repo = 'nvim-tree/nvim-web-devicons'
+
+[[plugins]]
+repo = 'romgrk/barbar.nvim'
+hook_add = '''
+    nnoremap <leader>bn :BufferNext<CR>
+    nnoremap <leader>bp :BufferPrevious<CR>
+    nnoremap <leader>bc :BufferClose<CR>
+    nnoremap <leader>br :BufferRestore<CR>
+'''
+
+[[plugins]]
+repo = 'norcalli/nvim-colorizer.lua'
