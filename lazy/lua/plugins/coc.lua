@@ -53,9 +53,6 @@ return {
         -- <S-TAB> を押したときの動作
         vim.api.nvim_set_keymap('i', '<S-Tab>', [[pumvisible() and "\<C-p>" or "\<C-h>"]], { noremap = true, expr = true })
 
-        -- <Tab> を押したときの動作
-        vim.api.nvim_set_keymap('i', '<Tab>', [[pumvisible() and "\<C-n>" or "\<Tab>"]], { noremap = true, expr = true })
-
         -- <c-space> を押したときに補完をトリガーする
         vim.api.nvim_set_keymap('i', '<C-Space>', 'coc#refresh()', { noremap = true, expr = true, silent = true })
 
