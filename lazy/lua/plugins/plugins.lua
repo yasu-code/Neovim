@@ -76,6 +76,9 @@ return {
         config = function()
             vim.opt.signcolumn = "yes"
             vim.opt.updatetime = 1000
+
+            vim.api.nvim_set_keymap("n", "]g", ":GitGutterNextHunk<CR>", { noremap = true, silent = true })
+            vim.api.nvim_set_keymap("n", "[g", ":GitGutterPrevHunk<CR>", { noremap = true, silent = true })
         end
     },
     {

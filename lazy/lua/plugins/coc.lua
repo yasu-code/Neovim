@@ -47,17 +47,11 @@ return {
         ]])
         -- 以下はキー割り当ての設定です
 
-        -- <TAB> を押したときの動作
-        vim.api.nvim_set_keymap('i', '<Tab>', [[pumvisible() and "\<C-n>" or (check_back_space() and "\<TAB>" or coc#refresh())]], { noremap = true, expr = true, silent = true })
-
-        -- <S-TAB> を押したときの動作
-        vim.api.nvim_set_keymap('i', '<S-Tab>', [[pumvisible() and "\<C-p>" or "\<C-h>"]], { noremap = true, expr = true })
-
         -- <c-space> を押したときに補完をトリガーする
         vim.api.nvim_set_keymap('i', '<C-Space>', 'coc#refresh()', { noremap = true, expr = true, silent = true })
 
-        vim.api.nvim_set_keymap('n', '[g', '<Plug>(coc-diagnostic-prev)', { noremap = true, silent = true })
-        vim.api.nvim_set_keymap('n', ']g', '<Plug>(coc-diagnostic-next)', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '[d', '<Plug>(coc-diagnostic-prev)', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', ']d', '<Plug>(coc-diagnostic-next)', { noremap = true, silent = true })
 
         -- Remap keys for gotos
         vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', { noremap = true, silent = true })

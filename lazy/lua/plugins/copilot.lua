@@ -13,7 +13,8 @@ return {
             vim.api.nvim_set_keymap("n", "<Leader>cd", ":Copilot disable<CR>", { noremap = true, silent = true })
 
             -- Copilot の提案を <C-Y> で受け入れる
-            vim.api.nvim_set_keymap("i", "<C-Y>", 'copilot#Accept("<CR>")', { expr = true, silent = true, script = true })
+            vim.api.nvim_set_keymap("n", "<C-Y>", 'copilot#Accept()', { expr = true, silent = true})
+            vim.api.nvim_set_keymap("i", "<C-Y>", 'copilot#Accept()', { expr = true, silent = true})
             -- Copilot のデフォルトの <Tab> キーマッピングを無効化
             vim.g.copilot_no_tab_map = true
 
@@ -26,7 +27,7 @@ return {
             vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Next()', { expr = true, silent = true })
             vim.api.nvim_set_keymap("i", "<C-K>", 'copilot#Previous()', { expr = true, silent = true })
 
-            -- Copilot の提案を <C-Space> でトグル
+            -- Copilot の提案を <C-P> で表示
             vim.api.nvim_set_keymap("n", "<C-P>", ":Copilot panel<CR>", { noremap = true, silent = true })
         end
     },
