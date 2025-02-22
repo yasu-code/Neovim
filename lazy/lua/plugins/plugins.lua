@@ -1,7 +1,6 @@
 return {
     {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
@@ -27,10 +26,13 @@ return {
         end,
     },
     {
-        "nathanaelkane/vim-indent-guides",
-        init = function()
-            vim.g.indent_guides_enable_on_vim_startup = 1
-        end,
+        "lukas-reineke/indent-blankline.nvim",
+        opts = {},
+        config = function()
+            require("ibl").setup({
+                indent = { highlight = { "Comment" } }  -- コメントと同じ色にする
+            })
+        end
     },
     {
         "jacoborus/tender.vim",
@@ -99,7 +101,6 @@ return {
     },
     {
         "phaazon/hop.nvim",
-        branch = "v2",
         config = function()
             require("hop").setup {
                 multi_windows = true,
@@ -136,7 +137,8 @@ return {
         end
     },
     {
-        "vim-airline/vim-airline-themes"
+        "vim-airline/vim-airline-themes",
+        after = "vim-airline"
     },
     {
         "APZelos/blamer.nvim",
