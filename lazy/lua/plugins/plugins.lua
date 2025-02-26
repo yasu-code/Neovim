@@ -151,34 +151,54 @@ return {
         "ryanoasis/vim-devicons"
     },
     {
-        "junegunn/fzf",
-        build = "./install --bin"
-    },
-    {
-        "junegunn/fzf.vim",
-        depends = "fzf",
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" }, -- アイコンを有効にする場合
         config = function()
-            vim.api.nvim_set_keymap("n", "<leader>ff", ":GFiles<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<leader>fgf", ":GFiles?<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<leader>fb", ":Buffers<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<leader>fh", ":History<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<leader>fw", ":Windows<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<leader>fr", ":Rg<CR>", { noremap = true, silent = true })
-            -- Set FZF options
-            vim.env.FZF_DEFAULT_OPTS = "--layout=reverse"
-            vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**'"
+            local ok, fzf_lua = pcall(require, "fzf-lua")
+            if not ok then
+                vim.notify("Failed to load fzf-lua", vim.log.levels.ERROR)
+                return
+            end
 
-            -- Configure FZF layout
-            vim.g.fzf_layout = {
-                up = '~90%',
-                window = {
-                    width = 0.8,
+            -- キーマッピング (関数が存在するかチェック)
+            local keymap = function(lhs, rhs)
+                if rhs then
+                    vim.keymap.set("n", lhs, rhs, { silent = true })
+                end
+            end
+
+            local keymap_v = function(lhs, rhs)
+                if rhs then
+                    vim.keymap.set("v", lhs, rhs, { silent = true })
+                end
+            end
+
+            keymap("<leader>ff", fzf_lua.git_files)
+            keymap("<leader>fgf", function() fzf_lua.git_files({ fuzzy = false }) end)
+            keymap("<leader>fb", fzf_lua.buffers)
+            keymap("<leader>fh", fzf_lua.oldfiles)
+            keymap("<leader>fw", fzf_lua.windows)
+            -- keymap("<leader>fr", fzf_lua.live_grep)
+            keymap("<leader>fr", fzf_lua.live_grep_native)
+            keymap_v("<leader>fr", function() require("fzf-lua").grep_visual() end)
+
+            -- fzf-lua のデフォルト設定
+            fzf_lua.setup({
+                fzf_opts = {
+                    ["--layout"] = "reverse"
+                },
+                fzf_bin = "fzf",
+                winopts = {
                     height = 0.8,
-                    yoffset = 0.5,
-                    xoffset = 0.5,
-                    border = 'sharp'
+                    width = 0.8,
+                    row = 0.5,
+                    col = 0.5,
+                    border = "sharp"
+                },
+                files = {
+                    cmd = "rg --files --hidden --glob '!.git/**'"
                 }
-            }
+            })
         end
     },
     {
