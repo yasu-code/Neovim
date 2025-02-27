@@ -129,7 +129,7 @@ return {
         "vim-airline/vim-airline",
         config = function()
             vim.opt.laststatus = 2
-            vim.g.airline_theme = "cobalt2"
+            vim.g.airline_theme = "tender"
             vim.g.airline_extensions_tabline_enabled = 1
             vim.g.airline_extensions_tabline_left_sep = " "
             vim.g.airline_extensions_tabline_left_alt_sep = "|"
@@ -193,7 +193,7 @@ return {
                     width = 0.8,
                     row = 0.5,
                     col = 0.5,
-                    border = "sharp"
+                    border = "rounded"
                 },
                 files = {
                     cmd = "rg --files --hidden --glob '!.git/**'"
@@ -213,10 +213,23 @@ return {
     {
         "romgrk/barbar.nvim",
         config = function()
+            -- キーマッピングの設定
             vim.api.nvim_set_keymap("n", "<leader>bn", ":BufferNext<CR>", { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<leader>bp", ":BufferPrevious<CR>", { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<leader>bc", ":BufferClose<CR>", { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<leader>br", ":BufferRestore<CR>", { noremap = true, silent = true })
+
+            -- barbar.nvim の設定
+            require'bufferline'.setup {
+                options = {
+                    -- ファイル名のみを表示（ディレクトリなし）
+                    format_name = function(bufnr)
+                        return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':t')
+                    end,
+                    -- タブ名の短縮を有効化
+                    truncate_names = true
+                }
+            }
         end
     },
     {
