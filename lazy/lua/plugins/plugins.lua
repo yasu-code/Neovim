@@ -218,18 +218,6 @@ return {
             vim.api.nvim_set_keymap("n", "<leader>bp", ":BufferPrevious<CR>", { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<leader>bc", ":BufferClose<CR>", { noremap = true, silent = true })
             vim.api.nvim_set_keymap("n", "<leader>br", ":BufferRestore<CR>", { noremap = true, silent = true })
-
-            -- barbar.nvim の設定
-            require'bufferline'.setup {
-                options = {
-                    -- ファイル名のみを表示（ディレクトリなし）
-                    format_name = function(bufnr)
-                        return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':t')
-                    end,
-                    -- タブ名の短縮を有効化
-                    truncate_names = true
-                }
-            }
         end
     },
     {
