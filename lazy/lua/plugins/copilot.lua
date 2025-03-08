@@ -1,7 +1,7 @@
 return {
     {
         "github/copilot.vim",
-        lazy = false,
+        lazy = true,
         cmd = { "Copilot" },
         config = function()
             -- Neovim を開いたときは Copilot を OFF にする
