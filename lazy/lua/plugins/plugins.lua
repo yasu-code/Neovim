@@ -256,4 +256,21 @@ return {
             )
         end,
     },
+    {
+        "shellRaining/hlchunk.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("hlchunk").setup({})
+        end
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+    },
+    {
+        "folke/zen-mode.nvim",
+    },
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = true,
+    }
 }
