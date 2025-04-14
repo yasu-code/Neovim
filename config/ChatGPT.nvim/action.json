@@ -1,0 +1,171 @@
+{
+  "complete_code": {
+    "type": "chat",
+    "opts": {
+      "template": "以下の {{lang}} で書かれたコードを完成させてください。既存のコードを貼り付けて、その続きを記述してください。\n\n既存のコード:\n```{{filetype}}\n{{input}}\n```\n\n```{{filetype}}\n",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "grammar_correction": {
+    "type": "chat",
+    "opts": {
+      "template": "以下の文を標準的な {{lang}} に修正してください：\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "true",
+        "default": "日本語"
+      }
+    }
+  },
+  "translate": {
+    "type": "chat",
+    "opts": {
+      "template": "次の文を {{lang}} に翻訳してください：\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.3
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "true",
+        "default": "日本語"
+      }
+    }
+  },
+  "keywords": {
+    "type": "chat",
+    "opts": {
+      "template": "以下のテキストから主なキーワードを抽出してください。\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.5,
+        "frequency_penalty": 0.8
+      }
+    }
+  },
+  "docstring": {
+    "type": "chat",
+    "opts": {
+      "template": "# 上記の関数に対して、丁寧で高品質なドックストリングを記述してください：\n# 良いドックストリングの書き方\n\n以下は、与えられた言語におけるベストプラクティスに従って記述された、高品質なドックストリングの例です。以下の点に注意が払われています：\n* パラメータと戻り値の型（該当する場合）\n* 発生しうるエラーや返される値の詳細（言語に応じて）\n\n受け取ったコード：\n\n```{{filetype}}\n{{input}}\n```\n\n以下は、ドックストリングを追加したコードです：\n\n```{{filetype}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "add_tests": {
+    "type": "chat",
+    "opts": {
+      "template": "以下のコードに対してテストを実装してください。\n\nコード:\n```{{filetype}}\n{{input}}\n```\n\nテスト:\n```{{filetype}}",
+      "strategy": "append",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "optimize_code": {
+    "type": "chat",
+    "opts": {
+      "template": "以下のコードを最適化してください。\n\nコード:\n```{{filetype}}\n{{input}}\n```\n\n最適化後のコード:\n```{{filetype}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "summarize": {
+    "type": "chat",
+    "opts": {
+      "template": "次のテキストを要約してください。\n\nテキスト:\n\"\"\"\n{{input}}\n\"\"\"\n\n要約:",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "fix_bugs": {
+    "type": "chat",
+    "opts": {
+      "template": "以下のコードのバグを修正してください。\n\nコード:\n```{{filetype}}\n{{input}}\n```\n\n修正後のコード:\n```{{filetype}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "explain_code": {
+    "type": "chat",
+    "opts": {
+      "title": " コードの説明",
+      "template": "次のコードの説明をしてください：\n\nコード:\n```{{filetype}}\n{{input}}\n```\n\nマークダウン形式で記述してください。\nこのコードがしていることは以下の通りです：\n```",
+      "strategy": "display",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "roxygen_edit": {
+    "type": "chat",
+    "opts": {
+      "template": "この R 関数に roxygen のスケルトンコメントを追加してください：\n\n```{{filetype}}\n[insert]\n\n{{input}}\n\n```",
+      "strategy": "prepend",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.5,
+        "max_tokens": 1024
+      }
+    }
+  },
+  "code_readability_analysis": {
+    "type": "chat",
+    "opts": {
+      "strategy": "quick_fix",
+      "template": "{{input}}",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "コードの可読性に関する問題点を特定してください。\n考慮すべき可読性の問題には以下が含まれます：\n- 不明瞭な命名\n- 目的がわかりにくいコード\n- 冗長または自明なコメント\n- コメントの欠如\n- 複雑なワンライナー\n- ネストが深すぎる構造\n- 変数名が長すぎる\n- 命名規則やコードスタイルの一貫性の欠如\n- コードの繰り返し\n他の問題点も自由に特定してください。\nユーザーは大きなファイルの一部としてコードを提出しています。\n指摘は以下の形式で記述してください：<行番号>|<問題点と改善案>\nコードに問題がなければ：<OK> のみを出力してください。"
+          },
+          {
+            "role": "user",
+            "content": "\n0 public class Logic {\n1      public static void main(String[] args) {\n..."
+          }
+        ]
+      }
+    }
+  }
+}
