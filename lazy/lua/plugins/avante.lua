@@ -5,15 +5,19 @@ return {
         version = false, -- Never set this value to "*"! Never!
         opts = {
             -- add any opts here
-            -- for example
+            -- provider = "openai",
             provider = "bedrock",
+            -- openai = {
+            --     endpoint = "https://api.openai.com/v1",
+            --     model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+            --     timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+            --     temperature = 0,
+            --     max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --     --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+            -- },
             bedrock = {
-                -- endpoint = "https://api.openai.com/v1",
-                model = "anthropic.claude-3-sonnet-20240229-v1:0", -- your desired model (or use gpt-4o, etc.)
-                timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-                temperature = 0,
-                max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-                --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+                aws_region = "us-west-2", -- AWS region to use for authentication and bedrock API
+                aws_profile = "", -- AWS profile to use for authentication, if unspecified uses default credentials chain
             },
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
