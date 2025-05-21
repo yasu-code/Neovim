@@ -7,7 +7,7 @@ return {
             -- add any opts here
             -- for example
             provider = "bedrock",
-            openai = {
+            bedrock = {
                 -- endpoint = "https://api.openai.com/v1",
                 model = "anthropic.claude-3-sonnet-20240229-v1:0", -- your desired model (or use gpt-4o, etc.)
                 timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
