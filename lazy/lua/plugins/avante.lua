@@ -16,8 +16,9 @@ return {
             --     --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
             -- },
             bedrock = {
-                aws_region = "us-west-2", -- AWS region to use for authentication and bedrock API
-                aws_profile = "", -- AWS profile to use for authentication, if unspecified uses default credentials chain
+                model = "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+                -- aws_region = "us-west-2", -- AWS region to use for authentication and bedrock API
+                -- aws_profile = "", -- AWS profile to use for authentication, if unspecified uses default credentials chain
             },
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
