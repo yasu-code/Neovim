@@ -239,8 +239,11 @@ return {
                 persist_size = true,
                 direction = 'float',
                 close_on_exit = true,
+                auto_scroll = false,
             }
+            vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
         end
+
     },
     {
         "goolord/alpha-nvim",
