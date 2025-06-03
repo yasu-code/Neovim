@@ -25,14 +25,14 @@ return {
             vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>Neotree reveal<CR>", { noremap = true, silent = true })
         end,
     },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        opts = {},
-        config = function()
-            require("ibl").setup({
-                indent = { highlight = { "Comment" } }  -- コメントと同じ色にする
-            })
-        end
+    { 
+        'echasnovski/mini.indentscope',
+        version = false,
+        opts = {
+            symbol = "▏",
+            -- symbol = "│",
+            options = { try_as_border = true },
+        }
     },
     {
         "jacoborus/tender.vim",
