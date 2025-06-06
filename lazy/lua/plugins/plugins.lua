@@ -151,55 +151,59 @@ return {
         "ryanoasis/vim-devicons"
     },
     {
-        "ibhagwan/fzf-lua",
-        dependencies = { "nvim-tree/nvim-web-devicons" }, -- アイコンを有効にする場合
+        "nvim-telescope/telescope.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" }, -- Telescopeの必須依存
+            { "nvim-tree/nvim-web-devicons" }, -- アイコン表示用
+            {
+                "nvim-telescope/telescope-fzf-native.nvim", -- fzfのネイティブ高速化
+                build = "make",
+                cond = vim.fn.executable("make") == 1
+            },
+        },
         config = function()
-            local ok, fzf_lua = pcall(require, "fzf-lua")
-            if not ok then
-                vim.notify("Failed to load fzf-lua", vim.log.levels.ERROR)
-                return
-            end
+            local telescope = require("telescope")
 
-            -- キーマッピング (関数が存在するかチェック)
+            telescope.setup({
+                defaults = {
+                    layout_strategy = "horizontal",
+                    layout_config = {
+                        prompt_position = "top",
+                        width = 0.8,
+                        height = 0.8,
+                    },
+                    sorting_strategy = "ascending",
+                    winblend = 0,
+                    border = true,
+                    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+                    file_ignore_patterns = { ".git/" },
+                },
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                    },
+                    git_files = {
+                        show_untracked = true,
+                    },
+                },
+            })
+
+            -- キーマッピング定義（fzf-luaと互換）
+            local builtin = require("telescope.builtin")
             local keymap = function(lhs, rhs)
                 if rhs then
-                    vim.keymap.set("n", lhs, rhs, { silent = true })
+                    vim.keymap.set("n", lhs, rhs, { silent = true, noremap = true })
                 end
             end
 
-            local keymap_v = function(lhs, rhs)
-                if rhs then
-                    vim.keymap.set("v", lhs, rhs, { silent = true })
-                end
-            end
-
-            keymap("<leader>ff", fzf_lua.git_files)
-            keymap("<leader>fgf", function() fzf_lua.git_files({ fuzzy = false }) end)
-            keymap("<leader>fb", fzf_lua.buffers)
-            keymap("<leader>fh", fzf_lua.oldfiles)
-            keymap("<leader>fw", fzf_lua.windows)
-            -- keymap("<leader>fr", fzf_lua.live_grep)
-            keymap("<leader>fr", fzf_lua.live_grep_native)
-            keymap_v("<leader>fr", function() require("fzf-lua").grep_visual() end)
-
-            -- fzf-lua のデフォルト設定
-            fzf_lua.setup({
-                fzf_opts = {
-                    ["--layout"] = "reverse"
-                },
-                fzf_bin = "fzf",
-                winopts = {
-                    height = 0.8,
-                    width = 0.8,
-                    row = 0.5,
-                    col = 0.5,
-                    border = "rounded"
-                },
-                files = {
-                    cmd = "rg --files --hidden --glob '!.git/**'"
-                }
-            })
-        end
+            -- 🔍 キーバインド（fzf-lua互換）
+            keymap("<leader>ff", builtin.git_files) -- Gitトラッキング内ファイル
+            keymap("<leader>fgf", function() builtin.git_files({ use_git_root = false }) end) -- fuzzy無効版は無いので仮置き
+            keymap("<leader>fb", builtin.buffers) -- バッファ一覧
+            keymap("<leader>fh", builtin.oldfiles) -- 履歴ファイル
+            keymap("<leader>fr", builtin.live_grep) -- ライブgrep（fzf-lua live_grep_nativeに相当）
+        end,
     },
     {
         "heavenshell/vim-jsdoc",
