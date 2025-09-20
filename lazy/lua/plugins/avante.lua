@@ -1,18 +1,13 @@
 return {
     {
         "yetone/avante.nvim",
-        event = "VeryLazy",
+        event = "BufReadPost",
         version = false, -- Never set this value to "*"! Never!
-        ---@module 'avante'
-        ---@type avante.Config
         opts = {
-            -- add any opts here
             provider = "bedrock",
             providers = {
                 bedrock = {
-                    model = "us.anthropic.claude-sonnet-4-20250514-v1:0",
-                    -- aws_region = "us-west-2", -- AWS region to use for authentication and bedrock API
-                    -- aws_profile = "", -- AWS profile to use for authentication, if unspecified uses default credentials chain
+                    model = "apac.anthropic.claude-sonnet-4-20250514-v1:0",
                 },
             },
         },
