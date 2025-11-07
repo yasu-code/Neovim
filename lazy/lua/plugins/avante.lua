@@ -7,7 +7,9 @@ return {
             provider = "bedrock",
             providers = {
                 bedrock = {
-                    model = "apac.anthropic.claude-sonnet-4-20250514-v1:0",
+                    -- model = "jp.anthropic.claude-haiku-4-5-20251001-v1:0",
+                    model = "jp.anthropic.claude-haiku-4-5-20251001-v1:0",
+                    aws_region = "ap-northeast-1"
                 },
             },
         },

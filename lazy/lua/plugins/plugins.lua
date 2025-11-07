@@ -20,9 +20,9 @@ return {
                 },
             })
 
-            vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>Neotree focus<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<C-n>", "<cmd>Neotree toggle<CR>", { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>Neotree reveal<CR>", { noremap = true, silent = true })
+            vim.keymap.set("n", "<leader>n", "<cmd>Neotree focus<CR>", { noremap = true, silent = true })
+            vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", { noremap = true, silent = true })
+            vim.keymap.set("n", "<C-f>", "<cmd>Neotree reveal<CR>", { noremap = true, silent = true })
         end,
     },
     { 
@@ -271,13 +271,15 @@ return {
         end
     },
     {
-        "nvim-treesitter/nvim-treesitter-context",
-    },
-    {
         "folke/zen-mode.nvim",
     },
     {
-        "OXY2DEV/markview.nvim",
-        lazy = true,
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
     }
 }
