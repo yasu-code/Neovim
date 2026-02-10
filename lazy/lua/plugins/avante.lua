@@ -1,6 +1,8 @@
 return {
     {
         "yetone/avante.nvim",
+        lazy = ture,
+        cmd = { "Avante" },
         event = "BufReadPost",
         version = false, -- Never set this value to "*"! Never!
         opts = {
